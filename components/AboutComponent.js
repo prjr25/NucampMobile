@@ -5,6 +5,8 @@ import { Text, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import Loading from './LoadingComponent';
+import * as Animatable from 'react-native-animatable';
+import Animated from 'react-native-reanimated';
 
 const mapStateToProps = state => {
     return {
@@ -55,23 +57,27 @@ class About extends React.Component {
         if (this.props.partners.errMess) {
             return (
                 <ScrollView>
-                    <Mission />
-                    <Card title="Community Partners">
-                        <Text>{this.props.partners.errMess}</Text>
-                    </Card>
+                    <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
+                        <Mission />
+                        <Card title="Community Partners">
+                            <Text>{this.props.partners.errMess}</Text>
+                        </Card>
+                    </Animatable.View>
                 </ScrollView>
             );
         }
         return (
             <ScrollView>
-                <Mission />
-                <Card title="Community Partners">
-                    <FlatList
-                        data={this.props.partners.partners}
-                        keyExtractor={item => item.id.toString()}
-                        renderItem={renderPartner}
-                    />
-                </Card>
+                <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
+                    <Mission />
+                    <Card title="Community Partners">
+                        <FlatList
+                            data={this.props.partners.partners}
+                            keyExtractor={item => item.id.toString()}
+                            renderItem={renderPartner}
+                        />
+                    </Card>
+                </Animatable.View>
             </ScrollView>
         );
     };

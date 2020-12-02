@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavorite } from '../redux/ActionCreators';
 import { Modal, Button, StyleSheet } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
     return {
@@ -26,8 +27,7 @@ function RenderCampsite(props) {
 
     if (campsite) {
         return (
-            <ScrollView>
-                
+                <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
                     <Card
                         featuredTitle={campsite.name}
                         image={{uri: baseUrl + campsite.image}}
@@ -54,8 +54,7 @@ function RenderCampsite(props) {
                         />
                     </View>
                     </Card>
-
-            </ScrollView>
+                </Animatable.View>
         );
         }
         return <View />;
@@ -80,13 +79,15 @@ function RenderComments({comments}) {
     }
     
     return (
-        <Card title='Comments'>
-            <FlatList
-                data={comments}
-                renderItem={renderCommentItem}
-                keyExtractor={item => item.id.toString()}
-            />
-        </Card>
+        <Animatable.View animation='fadeInUp' duration={2000} delay={1000}>
+            <Card title='Comments'>
+                <FlatList
+                    data={comments}
+                    renderItem={renderCommentItem}
+                    keyExtractor={item => item.id.toString()}
+                />
+            </Card>
+        </Animatable.View>
     )
 }
 
